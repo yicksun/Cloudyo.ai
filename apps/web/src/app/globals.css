@@ -1,0 +1,144 @@
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+.honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.form-error {
+  color: #b91c1c;
+  font-size: 0.875rem;
+  margin-top: 0.35rem;
+}
+.form-privacy,
+.form-optional {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+.form-privacy a,
+.newsletter-consent a {
+  text-decoration: underline;
+}
+.newsletter-consent {
+  margin-top: 4px;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 0.75rem;
+  line-height: 16px;
+  color: #cbd5e1;
+}
+.form-privacy {
+  position: absolute;
+  top: 100%;
+  margin-top: 2px;
+}
+.business-message > textarea {
+  margin-block-end: 0;
+}
+.newsletter-consent input {
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-right: 0;
+  accent-color: hsl(10 100% 53%);
+}
+.newsletter-form > button {
+  margin-top: 12px;
+}
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -5rem;
+  z-index: 100;
+  background: white;
+  color: hsl(193 83% 10%);
+  padding: 1rem;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+*:focus-visible {
+  outline: 2px solid hsl(10 100% 53%);
+  outline-offset: 3px;
+}
+.content-document {
+  max-width: 64rem;
+  margin: auto;
+  padding: 9rem 2rem 5rem;
+  color: #334155;
+}
+.content-document h1 {
+  font-size: 2.75rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: hsl(193 83% 10%);
+  margin-bottom: 1.5rem;
+}
+.content-document h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+}
+.content-document p {
+  margin: 1rem 0;
+}
+.content-document ul,
+.content-document ol {
+  padding-left: 1.5rem;
+}
+.content-document ul {
+  list-style: disc;
+}
+.content-document ol {
+  list-style: decimal;
+}
+.article-rich-body {
+  color: #475569;
+  line-height: 1.625;
+}
+.article-rich-body p {
+  margin-bottom: 1rem;
+}
+.article-rich-body h2,
+.article-rich-body h3 {
+  color: hsl(193 83% 10%);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+}
+.article-rich-body > h2:first-child,
+.article-rich-body > h3:first-child {
+  margin-top: 0;
+}
+.article-rich-body ul,
+.article-rich-body ol {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+.article-rich-body ul {
+  list-style: disc;
+}
+.article-rich-body ol {
+  list-style: decimal;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (max-width: 1023px) {
+  footer > .container > .grid {
+    margin-bottom: 44px;
+  }
+}

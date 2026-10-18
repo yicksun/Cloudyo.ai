@@ -1,0 +1,46 @@
+{
+  "capturedAt": "2026-10-18T17:16:27.786Z",
+  "browser": "156.0.8078.4",
+  "routes": [
+    "/",
+    "/expertise",
+    "/expertise/software-procurement",
+    "/expertise/it-cost-management",
+    "/expertise/cloud-services",
+    "/expertise/data-ai-solutions",
+    "/industries",
+    "/cloud-providers",
+    "/resources",
+    "/about",
+    "/contact",
+    "/partner-with-us",
+    "/privacy",
+    "/resources/2025-guide-cloud-finops",
+    "/resources/financial-services-oracle-renewal",
+    "/resources/ai-ready-data-architecture",
+    "/resources/microsoft-new-commerce-experience",
+    "/resources/retail-aws-migration",
+    "/resources/state-of-software-asset-management"
+  ],
+  "computedFonts": [
+    {
+      "element": "BODY",
+      "font": "\"Plus Jakarta Sans\", sans-serif"
+    },
+    {
+      "element": "NAV",
+      "font": "\"Plus Jakarta Sans\", sans-serif"
+    },
+    {
+      "element": "H1",
+      "font": "\"Plus Jakarta Sans\", sans-serif"
+    },
+    {
+      "element": "FOOTER",
+      "font": "\"Plus Jakarta Sans\", sans-serif"
+    }
+  ],
+  "fontRequests": [
+    "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2"
+  ]
+}

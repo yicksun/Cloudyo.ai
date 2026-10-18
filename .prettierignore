@@ -1,0 +1,12 @@
+node_modules
+package-lock.json
+.next
+dist
+.local
+test-results
+playwright-report
+apps/web/public
+apps/web/src/reference
+PRODUCT-SPECIFICATION.md
+TECHNICAL-SPECIFICATION.md
+AGENTS.md

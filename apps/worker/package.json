@@ -1,0 +1,21 @@
+{
+  "name": "@cloudyo/worker",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.cjs",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=cjs --external:@azure/* --external:@prisma/client --external:@react-email/* --external:react --external:react/* --external:zod --outfile=dist/index.cjs"
+  },
+  "dependencies": {
+    "@cloudyo/core": "1.0.0",
+    "@cloudyo/data": "1.0.0",
+    "@cloudyo/email": "1.0.0",
+    "@azure/functions": "4.10.0",
+    "@azure/identity": "4.13.0",
+    "@azure/communication-email": "1.1.0",
+    "@azure/storage-queue": "12.29.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.2"
+  }
+}

@@ -1,0 +1,210 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OutboxState {
+  Pending
+  Enqueued
+  Sending
+  ProviderAccepted
+  Delivered
+  Bounced
+  Failed
+  Unknown
+}
+
+enum SubscriberState {
+  Pending
+  Confirmed
+  Suppressed
+}
+
+model ContactEnquiry {
+  id        String   @id @default(uuid()) @db.Uuid
+  reference String   @unique
+  firstName String
+  lastName  String
+  company   String
+  email     String
+  topic     String
+  message   String
+  status    String   @default("New")
+  owner     String?
+  version   Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  notes     InternalNote[]
+  @@index([status, createdAt])
+  @@index([topic])
+}
+
+model PartnerApplication {
+  id               String   @id @default(uuid()) @db.Uuid
+  reference        String   @unique
+  orgName          String
+  contactName      String
+  workEmail        String
+  partnerType      String
+  valueProposition String
+  status           String   @default("New")
+  owner            String?
+  version          Int      @default(1)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  notes            InternalNote[]
+  @@index([status, createdAt])
+}
+
+model InternalNote {
+  id        String   @id @default(uuid()) @db.Uuid
+  contactId String?  @db.Uuid
+  partnerId String?  @db.Uuid
+  author    String
+  body      String
+  createdAt DateTime @default(now())
+  contact   ContactEnquiry? @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  partner   PartnerApplication? @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+}
+
+model Subscriber {
+  id            String @id @default(uuid()) @db.Uuid
+  email         String
+  lookupKey     String @unique
+  state         SubscriberState @default(Pending)
+  confirmedAt   DateTime?
+  suppressedAt  DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  consent       ConsentEvent[]
+  tokens        SubscriptionToken[]
+}
+
+model ConsentEvent {
+  id           String @id @default(uuid()) @db.Uuid
+  subscriberId String @db.Uuid
+  action       String
+  purpose      String @default("newsletter")
+  noticeVersion String
+  source       String
+  createdAt    DateTime @default(now())
+  subscriber   Subscriber @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
+  @@index([subscriberId, createdAt])
+}
+
+model SubscriptionToken {
+  id           String @id @default(uuid()) @db.Uuid
+  subscriberId String @db.Uuid
+  purpose      String
+  hash         String @unique
+  expiresAt    DateTime
+  usedAt       DateTime?
+  pendingEmail String?
+  subscriber   Subscriber @relation(fields: [subscriberId], references: [id], onDelete: Cascade)
+}
+
+model ContentPage {
+  id          String @id @default(uuid()) @db.Uuid
+  path        String @unique
+  kind        String @default("page")
+  version     Int @default(1)
+  publishedId String? @unique @db.Uuid
+  published   ContentRevision? @relation("Published", fields: [publishedId], references: [id])
+  revisions   ContentRevision[] @relation("Revisions")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContentRevision {
+  id          String @id @default(uuid()) @db.Uuid
+  pageId      String @db.Uuid
+  title       String
+  description String
+  body        Json
+  author      String
+  createdAt   DateTime @default(now())
+  page        ContentPage @relation("Revisions", fields: [pageId], references: [id], onDelete: Cascade)
+  publishedBy ContentPage? @relation("Published")
+  @@index([pageId, createdAt])
+}
+
+model Redirect {
+  source      String @id
+  destination String
+  createdAt   DateTime @default(now())
+}
+
+model MediaAsset {
+  id          String @id @default(uuid()) @db.Uuid
+  blobKey     String @unique
+  name        String
+  mediaType   String
+  size        Int
+  checksum    String
+  alt         String
+  status      String @default("Quarantined")
+  uploader    String
+  createdAt   DateTime @default(now())
+}
+
+model EmailOutbox {
+  id          String @id @default(uuid()) @db.Uuid
+  reference   String
+  template    String
+  payload     String?
+  state       OutboxState @default(Pending)
+  attempts    Int @default(0)
+  nextAttempt DateTime @default(now())
+  leaseUntil  DateTime?
+  leaseToken  String?
+  operationId String?
+  messageId   String? @unique
+  lastError   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  @@index([state, nextAttempt])
+  @@index([reference])
+}
+
+model EmailDeliveryEvent {
+  id          String @id
+  messageId   String
+  status      String
+  createdAt   DateTime
+}
+
+model AuditEvent {
+  id          String @id @default(uuid()) @db.Uuid
+  actor       String
+  action      String
+  target      String
+  createdAt   DateTime @default(now())
+  @@index([createdAt])
+}
+
+model IdempotencyRecord {
+  scope       String
+  keyHash     String
+  fingerprint String
+  reference   String
+  expiresAt   DateTime
+  @@id([scope, keyHash])
+}
+
+model AbuseLimit {
+  key       String @id
+  count     Int
+  expiresAt DateTime
+}
+
+model ApplicationSetting {
+  key       String @id
+  value     Json
+  version   Int @default(1)
+  updater   String
+  updatedAt DateTime @updatedAt
+}

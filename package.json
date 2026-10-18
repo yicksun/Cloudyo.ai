@@ -1,0 +1,55 @@
+{
+  "name": "cloudyo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22.12 <23"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace @cloudyo/web",
+    "build": "npm run generate --workspace @cloudyo/data && npm run build --workspace @cloudyo/web && npm run build --workspace @cloudyo/worker",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspace @cloudyo/web",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "prisma generate --schema packages/data/prisma/schema.prisma",
+    "db:migrate": "prisma migrate deploy --schema packages/data/prisma/schema.prisma",
+    "db:seed": "node --env-file-if-exists=.env --import tsx scripts/seed.ts",
+    "reference:capture": "tsx scripts/capture-reference.ts",
+    "local:database": "tsx scripts/local-database.ts"
+  },
+  "devDependencies": {
+    "@babel/generator": "7.28.5",
+    "@babel/parser": "7.28.5",
+    "@babel/traverse": "7.28.5",
+    "@babel/types": "7.28.5",
+    "@playwright/test": "1.64.1",
+    "@testing-library/react": "16.3.0",
+    "@types/babel__generator": "7.27.0",
+    "@types/babel__traverse": "7.28.0",
+    "@types/node": "22.19.3",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "axe-core": "4.11.0",
+    "embedded-postgres": "18.1.0-beta.16",
+    "jsdom": "27.3.0",
+    "eslint": "9.39.1",
+    "prettier": "3.7.4",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.50.1",
+    "vitest": "4.0.16"
+  },
+  "overrides": {
+    "motion-dom": "12.23.23",
+    "motion-utils": "12.23.6"
+  }
+}

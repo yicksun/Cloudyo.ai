@@ -1,0 +1,37 @@
+{
+  "name": "@cloudyo/web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build && node ../../scripts/package-web.mjs",
+    "start": "node ../../scripts/start-web.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@cloudyo/core": "1.0.0",
+    "@cloudyo/data": "1.0.0",
+    "@cloudyo/email": "1.0.0",
+    "@azure/identity": "4.13.0",
+    "@azure/storage-blob": "12.29.1",
+    "@hookform/resolvers": "5.2.2",
+    "@radix-ui/react-tabs": "1.1.13",
+    "@tiptap/react": "3.13.0",
+    "@tiptap/starter-kit": "3.13.0",
+    "framer-motion": "12.23.26",
+    "lucide-react": "0.562.0",
+    "next": "16.4.2",
+    "next-auth": "4.24.15",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.69.0",
+    "server-only": "0.0.1",
+    "tailwind-merge": "3.4.0",
+    "zod": "4.3.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

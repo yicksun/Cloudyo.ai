@@ -1,0 +1,211 @@
+{
+  "source": "https://cloudyo.ai",
+  "capturedAt": "2026-10-18T18:09:10.478Z",
+  "browser": "156.0.8078.4",
+  "routes": {
+    "/": [
+      {
+        "target": [
+          ".max-w-3xl > div > .sm\\:flex-row.flex-col.gap-4 > .border-primary-border.hover\\:bg-accent\\/90.min-h-10"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 13.5pt (18px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".text-\\[\\#FF9900\\]"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 1.55 (foreground color: #fcc065, background color: #f8fafc, font size: 18.0pt (24px), font weight: bold). Expected contrast ratio of 3:1"
+      },
+      {
+        "target": [".text-\\[\\#0089D6\\]"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.14 (foreground color: #63b6e5, background color: #f8fafc, font size: 18.0pt (24px), font weight: bold). Expected contrast ratio of 3:1"
+      },
+      {
+        "target": [
+          ".text-center.container.mx-auto > .sm\\:flex-row.flex-col.gap-4 > .border-primary-border.hover\\:bg-accent\\/90.min-h-10"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 13.5pt (18px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".min-h-9 > span"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".border-t > p"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(1)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(2)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(3)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ],
+    "/contact": [
+      {
+        "target": [".text-accent"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #ff370f, background color: #1d3b44, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:bg-accent\\/90 > span"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".border-t > p"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(1)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(2)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(3)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ],
+    "/partner-with-us": [
+      {
+        "target": [".text-accent"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.29 (foreground color: #ff370f, background color: #1d3b44, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".min-h-10"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".min-h-9.hover\\:bg-accent\\/90[type=\"submit\"] > span"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".border-t > p"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(1)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(2)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(3)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ],
+    "/resources": [
+      {
+        "target": ["#radix-«r0»-trigger-blog"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.28 (foreground color: #65758b, background color: #f1f5f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": ["#radix-«r0»-trigger-case-study"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.28 (foreground color: #65758b, background color: #f1f5f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": ["#radix-«r0»-trigger-whitepaper"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.28 (foreground color: #65758b, background color: #f1f5f9, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(1) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(1) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(2) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(2) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(3) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(3) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(4) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(4) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(5) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(5) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(6) > .mt-auto.pt-4.justify-between > .text-slate-400"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #90a1b9, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [
+          ".rounded-xl.bg-card.text-card-foreground:nth-child(6) > .mt-auto.pt-4.justify-between > .text-accent.hover\\:underline.gap-1"
+        ],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ff370f, background color: #ffffff, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".focus-visible\\:ring-1 > span"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.61 (foreground color: #ffffff, background color: #ff370f, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".border-t > p"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(1)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(2)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      },
+      {
+        "target": [".hover\\:text-white[href$=\"privacy\"]:nth-child(3)"],
+        "summary": "Fix any of the following:\n  Element has insufficient color contrast of 3.81 (foreground color: #62748e, background color: #021820, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  }
+}

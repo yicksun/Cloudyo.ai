@@ -1,0 +1,57 @@
+name: Application verification
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_dev
+      TEST_DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_test
+      E2E_DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_e2e_test
+      EMAIL_MODE: disabled
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - name: Start disposable database
+        shell: pwsh
+        run: |
+          $process = Start-Process node -ArgumentList @('node_modules\tsx\dist\cli.mjs', 'scripts\local-database.ts') -PassThru -RedirectStandardOutput postgres.log -RedirectStandardError postgres-errors.log
+          for ($attempt = 0; $attempt -lt 120; $attempt++) {
+            if ($process.HasExited) { Get-Content postgres-errors.log; throw 'Database helper exited.' }
+            if ((Test-Path postgres.log) -and (Select-String -Path postgres.log -Pattern 'Local PostgreSQL ready' -Quiet)) { exit 0 }
+            Start-Sleep -Seconds 1
+          }
+          throw 'Database did not become ready.'
+      - name: Migrate test database
+        shell: pwsh
+        run: |
+          $env:DATABASE_URL=$env:TEST_DATABASE_URL
+          npm run db:migrate
+      - run: npm run db:migrate && npm run db:seed && npm run build
+      - name: Prepare isolated browser database
+        shell: pwsh
+        run: |
+          $env:DATABASE_URL=$env:E2E_DATABASE_URL
+          npm run db:migrate
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm run db:seed
+      - run: npm run format:check && npm run lint && npm run typecheck
+      - run: npm test && npm run test:integration
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: verification-failure-evidence
+          path: |
+            playwright-report
+            test-results
+            postgres-errors.log

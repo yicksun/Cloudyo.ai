@@ -1,0 +1,204 @@
+.admin-layout {
+  min-height: 100vh;
+  background: #f5f7f9;
+  color: #12313a;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.admin-header {
+  background: #052b34;
+  color: white;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.admin-brand {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+.admin-brand span {
+  color: #ff3710;
+}
+.admin-signin {
+  max-width: 40rem;
+  margin: 10vh auto;
+  background: white;
+  padding: 3rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+}
+.admin-signin h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+.admin-signin p {
+  margin: 1rem 0;
+}
+.admin-eyebrow {
+  color: #d6330e;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.admin-workspace {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  max-width: 100rem;
+  margin: auto;
+}
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  border-right: 1px solid #e2e8f0;
+}
+.admin-nav button {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+}
+.admin-nav button[aria-current="page"] {
+  background: #052b34;
+  color: white;
+}
+.admin-main {
+  padding: 2rem;
+  min-width: 0;
+}
+.admin-main h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+}
+.admin-toolbar {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+.admin-button {
+  padding: 0.7rem 1rem;
+  border-radius: 0.4rem;
+  background: #052b34;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-button.secondary {
+  background: white;
+  color: #052b34;
+  border: 1px solid #cbd5e1;
+}
+.admin-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.admin-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.7rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  overflow-wrap: anywhere;
+}
+.admin-card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+.admin-card p {
+  margin: 0.4rem 0;
+}
+.admin-card dl {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+}
+.admin-card dt {
+  color: #64748b;
+}
+.admin-card dd {
+  white-space: pre-wrap;
+}
+.admin-field {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+.admin-layout input,
+.admin-layout textarea,
+.admin-layout select {
+  border: 1px solid #cbd5e1;
+  border-radius: 0.4rem;
+  padding: 0.7rem;
+  background: white;
+  width: 100%;
+  color: #12313a;
+}
+.admin-layout textarea {
+  min-height: 6rem;
+}
+.admin-layout input[type="checkbox"] {
+  width: auto;
+}
+.admin-notice {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.admin-error {
+  color: #b91c1c;
+  margin: 1rem 0;
+}
+.admin-status {
+  color: #166534;
+  margin: 1rem 0;
+}
+.admin-editor .tiptap {
+  border: 1px solid #cbd5e1;
+  padding: 1rem;
+  min-height: 16rem;
+  border-radius: 0.4rem;
+}
+.admin-editor .tiptap p {
+  margin-bottom: 0.7rem;
+}
+.admin-editor .tiptap h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.admin-editor .tiptap ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+.admin-editor .tiptap ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+@media (max-width: 768px) {
+  .admin-workspace {
+    display: block;
+  }
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .admin-main {
+    padding: 1rem;
+  }
+  .admin-signin {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+  }
+  .admin-card dl {
+    grid-template-columns: 1fr;
+  }
+}
