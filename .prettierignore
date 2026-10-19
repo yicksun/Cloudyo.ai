@@ -7,6 +7,7 @@ dist
 test-results
 playwright-report
 apps/web/public
+apps/web/next-env.d.ts
 apps/web/src/reference
 PRODUCT-SPECIFICATION.md
 TECHNICAL-SPECIFICATION.md

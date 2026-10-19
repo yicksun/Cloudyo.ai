@@ -60,6 +60,14 @@ test("clean CI generates the workspace Prisma client before seeding", async () =
   expect(seed).toBeGreaterThan(generate);
 });
 
+test("Git checkouts keep formatter-compatible line endings across platforms", async () => {
+  const attributes = await readFile(
+    new URL("../../.gitattributes", import.meta.url),
+    "utf8",
+  );
+  expect(attributes).toMatch(/^\* text=auto eol=lf$/m);
+});
+
 test("only Linux x64 Node 22 builds can claim deployable runtime compatibility", () => {
   expect(() => assertBuildRuntime("linux", "x64", "v22.23.3")).not.toThrow();
   expect(() => assertBuildRuntime("linux", "x64", "v22.12.0")).not.toThrow();
