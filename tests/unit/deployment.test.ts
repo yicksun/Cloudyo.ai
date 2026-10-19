@@ -49,6 +49,17 @@ test("runtime workspaces declare their direct Zod dependency in both manifest an
   }
 });
 
+test("clean CI generates the workspace Prisma client before seeding", async () => {
+  const workflow = await readFile(
+    new URL("../../.github/workflows/ci.yml", import.meta.url),
+    "utf8",
+  );
+  const generate = workflow.indexOf("- run: npm run db:generate");
+  const seed = workflow.indexOf("npm run db:seed");
+  expect(generate).toBeGreaterThan(-1);
+  expect(seed).toBeGreaterThan(generate);
+});
+
 test("only Linux x64 Node 22 builds can claim deployable runtime compatibility", () => {
   expect(() => assertBuildRuntime("linux", "x64", "v22.23.3")).not.toThrow();
   expect(() => assertBuildRuntime("linux", "x64", "v22.12.0")).not.toThrow();
