@@ -21,6 +21,8 @@ Supply an ARM parameters JSON file through an access-controlled secret-managemen
 
 `infra/release.bicep` defines a bounded, non-root private ACI release process. `scripts/azure-release.mjs` verifies exact source/archive and artifact hashes, authenticates with its separate managed identity, checks both targets before mutation, creates restricted runtime database roles, runs authorized migrations/optional seed, uploads worker then web over private SCM, and requires exact web readiness plus all six real Functions registrations. It never enables background processing. The release requires a verified digest-pinned Linux Node 22 image containing `python3` and `tar`, actual resource outputs, and fresh short-lived authenticated source/artifact URLs. A reusable GitHub token is not an acceptable substitute. Expired URLs stop the release rather than producing a partial success.
 
+The runner image is pinned to `node@sha256:0e5f906573693feaa1e21057ebdcfdb5bd5021f050b2dc7c9deceb629c7da2a8` (Node 22.23.3 Bookworm). The Linux verification workflow confirmed `python3`, `tar` and the release checks under user/group 1000 with all Linux capabilities dropped. That image check does not establish Azure managed-identity, PostgreSQL or SCM behavior.
+
 The operator must enable temporary release egress only for its bounded execution window, then remove the exact new ACI container, detach/delete its NAT/IP and remove the release identity's temporary permissions. Incremental ARM deployment does **not** delete old conditional resources automatically. Never delete the resource group, database, storage, Key Vault or existing resources as cleanup. These runner/control-plane paths still require actual Azure verification.
 
 Local verification commands:

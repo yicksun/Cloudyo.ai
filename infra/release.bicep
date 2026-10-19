@@ -3,7 +3,8 @@ param location string = 'southeastasia'
 @description('Unique bounded release container name.')
 param name string
 @description('Verified Linux Node 22 image pinned by sha256 digest; must contain python3 and tar.')
-param image string
+@allowed(['node@sha256:0e5f906573693feaa1e21057ebdcfdb5bd5021f050b2dc7c9deceb629c7da2a8'])
+param image string = 'node@sha256:0e5f906573693feaa1e21057ebdcfdb5bd5021f050b2dc7c9deceb629c7da2a8'
 @description('Existing dedicated ACI subnet with an explicitly enabled temporary NAT gateway.')
 param subnetId string
 @description('Existing narrowly scoped release managed identity.')

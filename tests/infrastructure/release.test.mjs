@@ -141,3 +141,22 @@ test("provisioning is validation-only by default and requires an explicit risk a
   assert.match(script, /\$RegisterProviders -and \$Mode -ne 'Deploy'/);
   assert.match(script, /--result-format', 'ResourceIdOnly'/);
 });
+
+test("ACI uses the same immutable non-root release image verified by Linux CI", async () => {
+  const template = await readFile(
+    new URL("../../infra/release.bicep", import.meta.url),
+    "utf8",
+  );
+  const workflow = await readFile(
+    new URL("../../.github/workflows/infrastructure.yml", import.meta.url),
+    "utf8",
+  );
+  const image = template.match(
+    /^param image string = '(node@sha256:[a-f0-9]{64})'$/m,
+  )?.[1];
+  assert.ok(image);
+  assert.ok(workflow.includes(`RELEASE_IMAGE: ${image}`));
+  assert.match(template, /runAsUser: 1000/);
+  assert.match(template, /allowPrivilegeEscalation: false/);
+  assert.match(template, /privileged: false/);
+});
