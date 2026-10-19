@@ -2,6 +2,20 @@
 
 This guide deploys the existing application to **already provisioned** Azure resources. It does not approve spending, create infrastructure, assign permissions, register identities, send email, swap slots or change DNS. Bicep remains a separate deliverable after subscription, region, network, service tier and cost approval, as required by the technical specification.
 
+## Subscription-specific proposal: awaiting approval
+
+The draft [infrastructure plan](.azure/infrastructure-plan.json) targets subscription `db78cda5-d94e-4802-9b5c-e930f496cd18`, new resource group `rg-cloudyo-stg-e65d`, and `southeastasia`. **Nothing has been provisioned.** The existing `test` resource group is retained untouched. The proposed environment is synthetic-data staging, not a production cutover; live email and all six worker functions remain disabled.
+
+The proposal preserves Linux S1 web/EP1 worker slots, private PostgreSQL 18 B1ms with 32 GiB, independent application/host storage, private Key Vault and SCM access, and Standard Front Door with a filtered public origin. Nine private endpoints and seven private DNS zones are enumerated. A temporary VNet-connected ACI release runner, with temporary NAT/IP egress, is required for privileged migrations and private SCM uploads; this runner is **not implemented yet**. Public GitHub runners and the local workstation cannot deploy directly to private SCM or migrate the private database.
+
+The current retail planning subtotal is **USD 378.67/month** at 730 hours, including 5 GB of paid logs. It is **not a quote or spending cap**: traffic/DNS queries, additional Files/storage operations, temporary ACI/NAT/IP use, extra instances/logs, future email/scanning/event activation and taxes are additional. Subscription-specific S1/EP1 capacity and global name availability remain unverified.
+
+Approval must explicitly cover the plan's security tradeoffs: Key Vault-protected Prisma/Entra credentials; shared-key capability only for the isolated Premium Functions Azure Files content share; public authenticated Azure Monitor; and a public-addressed, strictly Front Door-filtered web origin. `WEBSITE_RUN_FROM_PACKAGE=1` does not remove the Azure Files requirement. A fully keyless/no-Files worker or fully private Monitor/origin requires a revised implementation and estimate. The business storage account remains shared-key-disabled. Private-only Functions cannot receive public Event Grid push deliveries; authenticated reachable event ingress must be designed before later activation.
+
+Application release `56ee2b6e3c54483ec5f8d89d86c381ef473c1bfb` passed [full application verification](https://github.com/yicksun/Cloudyo.ai/actions/runs/39211758193) and [Linux packaging](https://github.com/yicksun/Cloudyo.ai/actions/runs/39213649050). Its downloaded ZIP hashes are recorded in the plan. Infrastructure/documentation commits are distinct from that immutable application release. Before deployment, reauthenticate the workflow/ref and artifacts; never use an expired/missing artifact or a different commit silently.
+
+The next gate is explicit architecture approval, then Bicep/runner implementation and validation, followed by a **separate risk-acknowledged deployment/spending approval**. Database initialization, real Entra configuration, background activation and production acceptance are not established by either CI or the draft plan.
+
 ## 1. Supported target and prerequisites
 
 | Component    | Required existing configuration                                                                                                                                                           |
