@@ -9,9 +9,9 @@ jobs:
     runs-on: windows-latest
     timeout-minutes: 25
     env:
-      DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_dev
-      TEST_DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_test
-      E2E_DATABASE_URL: postgresql://cloudyo:local-development-only@localhost:55432/cloudyo_e2e_test
+      DATABASE_URL: postgresql://cloudyo:local-development-only@127.0.0.1:55432/cloudyo_dev
+      TEST_DATABASE_URL: postgresql://cloudyo:local-development-only@127.0.0.1:55432/cloudyo_test
+      E2E_DATABASE_URL: postgresql://cloudyo:local-development-only@127.0.0.1:55432/cloudyo_e2e_test
       EMAIL_MODE: disabled
     steps:
       - uses: actions/checkout@v4

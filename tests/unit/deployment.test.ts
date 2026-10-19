@@ -60,6 +60,22 @@ test("clean CI generates the workspace Prisma client before seeding", async () =
   expect(seed).toBeGreaterThan(generate);
 });
 
+test("CI database clients use the server's explicit IPv4 loopback binding", async () => {
+  const workflow = await readFile(
+    new URL("../../.github/workflows/ci.yml", import.meta.url),
+    "utf8",
+  );
+  for (const name of [
+    "DATABASE_URL",
+    "TEST_DATABASE_URL",
+    "E2E_DATABASE_URL",
+  ]) {
+    const match = new RegExp(`^\\s+${name}:\\s+(\\S+)`, "m").exec(workflow);
+    if (!match) throw new Error(`Missing CI setting: ${name}`);
+    expect(new URL(match[1]).hostname).toBe("127.0.0.1");
+  }
+});
+
 test("Git checkouts keep formatter-compatible line endings across platforms", async () => {
   const attributes = await readFile(
     new URL("../../.gitattributes", import.meta.url),

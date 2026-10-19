@@ -105,7 +105,7 @@ Visual expectations in `tests\e2e\reference` are screenshots captured from the l
 
 CI runs formatting, lint, types, unit/integration checks, builds and browser gates with synthetic data. Actual tenant/email/storage behavior, manual keyboard/screen-reader checks, field performance, owner visual acceptance, backup restore and cloud rollback remain staging/release gates.
 
-The Windows CI runner initializes the bundled PostgreSQL tools directly with UTF-8/C locale, inherited runner environment and visible initialization errors, then stops the disposable server even when verification fails. The optional local database helper remains for interactive development.
+The Windows CI runner initializes the bundled PostgreSQL tools directly with UTF-8/C locale, inherited runner environment and visible initialization errors, then stops the disposable server even when verification fails. Client URLs match its explicit IPv4 loopback binding to avoid IPv6 connection retries. The optional local database helper remains for interactive development.
 Git attributes keep source checkouts LF-normalized on Windows and Linux; generated Next.js type references are excluded from formatting.
 
 **Known accessibility release blocker:** the original site's orange controls, muted footer text and resource metadata fail contrast requirements. Original colors are retained because theme changes have not been approved. `tests\e2e\reference\accessibility.json` records the live site's findings. The automated regression gate permits only measured existing color/font combinations without increasing their count, and fails new serious issues; it is **not** a claim of WCAG 2.2 AA compliance. Contrast corrections or an explicitly accepted exception still require the owner's decision.
