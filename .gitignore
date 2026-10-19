@@ -9,5 +9,6 @@ test-results/
 !.env.example
 !.env.test.example
 .local/
+.copilot-azure/
 *.tsbuildinfo
 local.settings.json
