@@ -1,0 +1,23 @@
+name: Package Linux deployment
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Linux x64 release packages
+        shell: pwsh
+        run: ./scripts/build-deployment.ps1 -ReleaseName "${{ github.sha }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cloudyo-linux-${{ github.sha }}
+          path: |
+            .local/deployments/${{ github.sha }}/web.zip
+            .local/deployments/${{ github.sha }}/worker.zip
+            .local/deployments/${{ github.sha }}/manifest.json
+          if-no-files-found: error
+          retention-days: 14

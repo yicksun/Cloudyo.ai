@@ -2,6 +2,8 @@
 
 Azure-ready Next.js application based on the existing [cloudyo.ai](https://cloudyo.ai) public website. The product and technical specifications remain the requirements of record. This repository contains the application, not a deployed Azure environment.
 
+See [DEPLOYMENT.md](DEPLOYMENT.md) for Linux release packaging, guarded scripts targeting existing Azure apps, required configuration, migrations, staging, production promotion and rollback.
+
 ## Requirements and local setup
 
 Use Node.js 22 LTS (22.12 or newer within major 22), npm, and PostgreSQL. The lockfile pins the supported dependency combination. Windows filesystem commands below use PowerShell.
