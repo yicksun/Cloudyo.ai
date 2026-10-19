@@ -2,9 +2,41 @@
 
 This guide deploys the existing application to **already provisioned** Azure resources. It does not approve spending, create infrastructure, assign permissions, register identities, send email, swap slots or change DNS. Bicep remains a separate deliverable after subscription, region, network, service tier and cost approval, as required by the technical specification.
 
-## Subscription-specific proposal: awaiting approval
+## Subscription-specific production approval
 
-The draft [infrastructure plan](.azure/infrastructure-plan.json) targets subscription `db78cda5-d94e-4802-9b5c-e930f496cd18`, new resource group `rg-cloudyo-stg-e65d`, and `southeastasia`. **Nothing has been provisioned.** The existing `test` resource group is retained untouched. The proposed environment is synthetic-data staging, not a production cutover; live email and all six worker functions remain disabled.
+On 2026-10-19 the owner approved production deployment to the previously supplied subscription. The [plan's production override](.azure/infrastructure-plan.json) records this instruction and supersedes the original staging target: use `rg-cloudyo-prd-e65d`, primary app sites with `APP_ENV=production` and one active S1/EP1 pair. Plans retain slot capability; additional slots are not created until their isolated data/configuration is approved. Approval is not evidence of provisioning or production acceptance. Keep `cloudyo.ai` DNS unchanged and all six worker functions/email disabled until the relevant checks and activation decisions are complete.
+
+### Production infrastructure implementation
+
+`infra/main.bicep` creates only the new production resource group and its resource-group-scoped modules. It does not touch `test`. `scripts/provision.ps1` defaults to Azure validation, constrains the subscription/group/region, rejects missing credentials and placeholder recipient addresses, and requires `-RiskAcknowledged` for provisioning. `-RegisterProviders` is permitted only in deployment mode. Review `WhatIf` output before execution.
+
+Supply an ARM parameters JSON file through an access-controlled secret-management process, outside tracked source. Required values are `internalEmail`, `entraClientId`, and secure object `secrets` containing independent `databaseAdminPassword`, `webDatabasePassword`, `workerDatabasePassword`, `migrationDatabasePassword`, `outboxEncryptionKey` (64 hexadecimal characters), `abuseHashSecret`, `nextauthSecret`, and `entraClientSecret`. Preserve `secretExpirationEpoch` across redeployments and schedule rotation before its 180-day initial deadline; do not rotate encryption keys without an outbox/backlog compatibility plan. The environment-driven `infra/main.bicepparam` is an alternative input mechanism; any compiled parameters contain secrets and belong only in protected, ignored temporary storage.
+
+```powershell
+.\scripts\provision.ps1 -ParameterFile .local\production.parameters.json
+.\scripts\provision.ps1 -ParameterFile .local\production.parameters.json -Mode WhatIf
+# Only after reviewed changes, operational inputs, and risk approval:
+.\scripts\provision.ps1 -ParameterFile .local\production.parameters.json -Mode Deploy -RiskAcknowledged -RegisterProviders
+```
+
+`infra/release.bicep` defines a bounded, non-root private ACI release process. `scripts/azure-release.mjs` verifies exact source/archive and artifact hashes, authenticates with its separate managed identity, checks both targets before mutation, creates restricted runtime database roles, runs authorized migrations/optional seed, uploads worker then web over private SCM, and requires exact web readiness plus all six real Functions registrations. It never enables background processing. The release requires a verified digest-pinned Linux Node 22 image containing `python3` and `tar`, actual resource outputs, and fresh short-lived authenticated source/artifact URLs. A reusable GitHub token is not an acceptable substitute. Expired URLs stop the release rather than producing a partial success.
+
+The operator must enable temporary release egress only for its bounded execution window, then remove the exact new ACI container, detach/delete its NAT/IP and remove the release identity's temporary permissions. Incremental ARM deployment does **not** delete old conditional resources automatically. Never delete the resource group, database, storage, Key Vault or existing resources as cleanup. These runner/control-plane paths still require actual Azure verification.
+
+Local verification commands:
+
+```powershell
+az bicep build --file infra\main.bicep --outfile .local\infra\main.json
+az bicep build --file infra\release.bicep --outfile .local\infra\release.json
+checkov -d infra --framework bicep --skip-download
+node --test tests\infrastructure\release.test.mjs
+```
+
+Checkov exceptions are resource-local, not global exclusions: the accepted single-instance/non-zone-redundant/LRS baseline; no client certificates for public marketing traffic or the private non-HTTP worker; no fake worker HTTP health route; Standard Front Door's deliberately filtered public origin; private storage requiring no trusted-services bypass; and parameterized storage-name false positives covered by exact-name tests. The separate host Azure Files shared-key exception is also documented explicitly. These are tradeoffs, not assertions of production high availability or a fully keyless environment.
+
+### Original architecture baseline and tradeoffs
+
+The original [infrastructure plan](.azure/infrastructure-plan.json) targeted subscription `db78cda5-d94e-4802-9b5c-e930f496cd18`, new resource group `rg-cloudyo-stg-e65d`, and `southeastasia`. Its resource catalog is retained as the architecture baseline; the production override above governs actual environment, names and deployment targets. The existing `test` resource group remains untouched.
 
 The proposal preserves Linux S1 web/EP1 worker slots, private PostgreSQL 18 B1ms with 32 GiB, independent application/host storage, private Key Vault and SCM access, and Standard Front Door with a filtered public origin. Nine private endpoints and seven private DNS zones are enumerated. A temporary VNet-connected ACI release runner, with temporary NAT/IP egress, is required for privileged migrations and private SCM uploads; this runner is **not implemented yet**. Public GitHub runners and the local workstation cannot deploy directly to private SCM or migrate the private database.
 
@@ -14,7 +46,7 @@ Approval must explicitly cover the plan's security tradeoffs: Key Vault-protecte
 
 Application release `56ee2b6e3c54483ec5f8d89d86c381ef473c1bfb` passed [full application verification](https://github.com/yicksun/Cloudyo.ai/actions/runs/39211758193) and [Linux packaging](https://github.com/yicksun/Cloudyo.ai/actions/runs/39213649050). Its downloaded ZIP hashes are recorded in the plan. Infrastructure/documentation commits are distinct from that immutable application release. Before deployment, reauthenticate the workflow/ref and artifacts; never use an expired/missing artifact or a different commit silently.
 
-The next gate is explicit architecture approval, then Bicep/runner implementation and validation, followed by a **separate risk-acknowledged deployment/spending approval**. Database initialization, real Entra configuration, background activation and production acceptance are not established by either CI or the draft plan.
+Architecture and production deployment approval are now recorded. Bicep/runner implementation, validation and an incremental change/risk review must precede provisioning. Database initialization, real Entra configuration, background activation and production acceptance are not established by application CI or the infrastructure plan.
 
 ## 1. Supported target and prerequisites
 

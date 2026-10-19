@@ -46,6 +46,12 @@ interface Plan {
       nodeMajor: number;
       sha256: Record<string, string>;
     };
+    productionOverride: {
+      userInstruction: string;
+      resourceGroup: string;
+      environment: string;
+      deploymentStatus: string;
+    };
   };
 }
 
@@ -203,7 +209,7 @@ test("estimated network quantities match planned resources and the subtotal disc
   expect(cost.unpricedOrVariable.length).toBeGreaterThan(0);
 });
 
-test("staging plan retains exact Linux artifact provenance and independent approval gates", async () => {
+test("approved production plan retains exact Linux provenance without implying deployment or background activation", async () => {
   const { meta, plan } = await loadPlan();
   expect(plan.release.applicationCommit).toMatch(/^[a-f0-9]{40}$/);
   expect(plan.release.platform).toBe("linux");
@@ -221,6 +227,13 @@ test("staging plan retains exact Linux artifact provenance and independent appro
     expect(plan.approval.deploymentApproved).toBe(true);
     expect(plan.approval.spendingApproved).toBe(true);
   }
-  expect(plan.approval.productionApproved).toBe(false);
+  expect(plan.approval.productionApproved).toBe(true);
+  expect(plan.productionOverride.environment).toBe("production");
+  expect(plan.productionOverride.resourceGroup).toBe("rg-cloudyo-prd-e65d");
+  expect(plan.productionOverride.userInstruction).toBe(
+    "approved to go for production deployment on Azure subscription provided previously",
+  );
+  if (meta.status !== "deployed")
+    expect(plan.productionOverride.deploymentStatus).not.toBe("deployed");
   expect(plan.approval.liveBackgroundProcessingApproved).toBe(false);
 });
