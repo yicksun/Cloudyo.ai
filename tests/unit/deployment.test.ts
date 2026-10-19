@@ -31,6 +31,24 @@ async function fixture(relative: string, value = "synthetic fixture") {
   await writeFile(destination, value);
 }
 
+test("runtime workspaces declare their direct Zod dependency in both manifest and lockfile", async () => {
+  const lock = JSON.parse(
+    await readFile(new URL("../../package-lock.json", import.meta.url), "utf8"),
+  );
+  for (const workspace of ["apps/worker", "packages/data"]) {
+    const manifest = JSON.parse(
+      await readFile(
+        new URL(`../../${workspace}/package.json`, import.meta.url),
+        "utf8",
+      ),
+    );
+    expect(manifest.dependencies.zod).toBe("4.3.5");
+    expect(lock.packages[workspace].dependencies.zod).toBe(
+      manifest.dependencies.zod,
+    );
+  }
+});
+
 test("only Linux x64 Node 22 builds can claim deployable runtime compatibility", () => {
   expect(() => assertBuildRuntime("linux", "x64", "v22.23.3")).not.toThrow();
   expect(() => assertBuildRuntime("linux", "x64", "v22.12.0")).not.toThrow();
